@@ -4,6 +4,7 @@ import 'package:intro_to_flutter/ui/dog_card.dart';
 
 class DogList extends StatelessWidget {
   final List<Dog> dogs;
+
   DogList(this.dogs);
 
   @override
@@ -14,10 +15,10 @@ class DogList extends StatelessWidget {
   ///~ recyclerview
   ListView _buildList(context) {
     return ListView.builder(
-      itemCount: dogs.length,
+        itemCount: dogs.length,
         itemBuilder: (context, pos) {
-           /// decision point to load heterogeneous items
-           return DogCard(dogs[pos]);
+          /// decision point to load heterogeneous items
+          return DogCard(dogs[pos]);
         });
   }
 }

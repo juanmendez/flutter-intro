@@ -9,10 +9,23 @@ import 'package:test/test.dart';
 import 'package:intro_to_flutter/data/dog_service.dart';
 
 void main() {
-  test("ensure image is returned", () {
+  test("ensure image is returned", () async {
     getRandomImage().listen((String url){
       assert(url.isNotEmpty);
       print(url);
     });
+  });
+
+  test("ensure we get list of dogs", () async {
+    getDogBreeds().then((dogs){
+      assert(dogs.isNotEmpty);
+    });
+  });
+
+  test("ensure we can obtain an image", () {
+    getImageByBreed("hound").then((image){
+      assert(image.isNotEmpty);
+    });
+
   });
 }

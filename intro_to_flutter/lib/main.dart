@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intro_to_flutter/data/dog_model.dart';
-import 'package:intro_to_flutter/ui/dog_card.dart';
+import 'package:intro_to_flutter/data/dog_service.dart';
 import 'package:intro_to_flutter/ui/dog_list.dart';
 
 void main() => runApp(MyApp());
@@ -8,7 +8,6 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       title: 'Pet Gallery',
       theme: ThemeData(brightness: Brightness.dark),
@@ -27,14 +26,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Dog> dogs = []
-    ..add(Dog('Ruby', 'Portland, OR, USA',
-        'Ruby is a very good girl. Yes: Fetch, loungin\'. No: Dogs who get on furniture.'))
-    ..add(Dog('Rex', 'Seattle, WA, USA', 'Best in Show 1999'))
-    ..add(Dog('Rod Stewart', 'Prague, CZ',
-        'Star good boy on international snooze team.'))
-    ..add(Dog('Herbert', 'Dallas, TX, USA', 'A Very Good Boy'))
-    ..add(Dog('Buddy', 'North Pole, Earth', 'Self proclaimed human lover.'));
+  List<Dog> dogs = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    getDogBreeds().then((list) {
+      setState(() {
+        dogs = list;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         backgroundColor: Colors.black87,
       ),
-      body: Container(
-        child: DogList(dogs)
-      ),
+      body: Container(child: DogList(dogs)),
     );
   }
 }

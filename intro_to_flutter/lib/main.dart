@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intro_to_flutter/data/dog_model.dart';
 import 'package:intro_to_flutter/data/dog_service.dart';
+import 'package:intro_to_flutter/ui/block/dog_block.dart';
+import 'package:intro_to_flutter/ui/block/dog_event.dart';
 import 'package:intro_to_flutter/ui/dog_list.dart';
 
 void main() => runApp(MyApp());
@@ -26,17 +28,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Dog> dogs = [];
+  final _bloc = DogBloc();
+
 
   @override
   void initState() {
     super.initState();
-
-    getDogBreeds().then((list) {
-      setState(() {
-        dogs = list;
-      });
-    });
+    _bloc.eventSink.add(PullDogsEvent());
   }
 
   @override
@@ -46,7 +44,23 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         backgroundColor: Colors.black87,
       ),
-      body: Container(child: DogList(dogs)),
+      body: Container(
+        child: StreamBuilder(
+            stream: _bloc.stateStream,
+            initialData: List<Dog>(),
+            builder: (
+          BuildContext context,
+          AsyncSnapshot<List<Dog>> snapshot,
+        ) {
+          return DogList(snapshot.data);
+        }),
+      ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _bloc.dispose();
   }
 }

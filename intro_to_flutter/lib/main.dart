@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intro_to_flutter/data/dog_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intro_to_flutter/ui/block/dog_bloc.dart';
 import 'package:intro_to_flutter/ui/block/dog_event.dart';
 import 'package:intro_to_flutter/ui/dog_list.dart';
@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    _bloc.eventSink.add(PullDogsEvent());
+    _bloc.dispatch(PullDogsEvent());
   }
 
   @override
@@ -43,15 +43,10 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.black87,
       ),
       body: Container(
-        child: StreamBuilder(
-            stream: _bloc.stateStream,
-            initialData: List<Dog>(),
-            builder: (
-              BuildContext context,
-              AsyncSnapshot<List<Dog>> snapshot,
-            ) {
-              return DogList(snapshot.data);
-            }),
+        child: BlocProvider<DogBloc>(
+          bloc: _bloc,
+          child: DogList(),
+        ),
       ),
     );
   }

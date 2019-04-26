@@ -76,8 +76,7 @@ class _DogCardState extends State<DogCard> {
     /// tried only dog.name but it failed
     return Container(
       height: 115.0,
-      child: Stack(
-        /// ~frameLayout
+      child: Stack( /// ~frameLayout
         children: <Widget>[
           Positioned(
             left: 50.0,

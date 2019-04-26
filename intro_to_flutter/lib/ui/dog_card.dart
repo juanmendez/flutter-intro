@@ -36,12 +36,12 @@ class _DogCardState extends State<DogCard> {
 
   Widget get dogCard {
     return Container(
-        width: 290.0,
 
         /// can't wait for match_parent
-        height: 115.0,
+        width: 290.0,
 
         /// can't wait for wrap_content
+        height: 115.0,
         child: Card(
             color: Colors.black87,
             child: Padding(
@@ -77,6 +77,7 @@ class _DogCardState extends State<DogCard> {
     return Container(
       height: 115.0,
       child: Stack(
+        /// ~relative-layout
         /// ~frameLayout
         children: <Widget>[
           Positioned(

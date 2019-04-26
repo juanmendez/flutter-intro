@@ -26,7 +26,7 @@ Future<String> getImageByBreed(String breedName) async {
     var response = await request.close();
     var responseBody = await response;
 
-    return responseBody.transform(utf8.decoder).join().then((responseBody){
+    return responseBody.transform(utf8.decoder).join().then((responseBody) {
       var body = json.decode(responseBody);
       var images = body["message"];
       return images.first ?? "";
@@ -53,7 +53,7 @@ Future<List<Dog>> getDogBreeds() async {
       var dogs = List<Dog>();
       for (var value in list) {
         var dog = Dog(value, "location", "description");
-        dog.imageUrl =  await getImageByBreed(value);
+        dog.imageUrl = await getImageByBreed(value);
         dogs.add(dog);
       }
 

@@ -1,5 +1,3 @@
-abstract class DogEvent{}
+abstract class DogEvent {}
 
-class PullDogsEvent extends DogEvent{}
-
-
+class PullDogsEvent extends DogEvent {}

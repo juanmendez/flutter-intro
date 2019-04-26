@@ -5,7 +5,6 @@ import 'package:intro_to_flutter/data/dog_service.dart';
 import 'package:intro_to_flutter/ui/block/dog_event.dart';
 
 class DogBloc {
-
   /**
    * In Android we create a MutableLiveData which is private and used within
    * a ViewModel in order to emit updates.
@@ -18,11 +17,15 @@ class DogBloc {
    * see https://www.youtube.com/watch?v=oxeYeMHVLII
    */
   final _stateController = StreamController<List<Dog>>();
+
   StreamSink<List<Dog>> get _stateSink => _stateController.sink;
+
   Stream<List<Dog>> get stateStream => _stateController.stream;
 
   final _eventController = StreamController<DogEvent>();
+
   Stream<DogEvent> get _eventStream => _eventController.stream;
+
   Sink<DogEvent> get eventSink => _eventController.sink;
 
   DogBloc() {
@@ -30,9 +33,9 @@ class DogBloc {
   }
 
   void _eventHandler(DogEvent event) {
-    if(event is PullDogsEvent) {
-      getDogBreeds().then((dogs){
-          _stateSink.add(dogs);
+    if (event is PullDogsEvent) {
+      getDogBreeds().then((dogs) {
+        _stateSink.add(dogs);
       });
     }
   }

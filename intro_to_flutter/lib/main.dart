@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intro_to_flutter/data/dog_model.dart';
-import 'package:intro_to_flutter/data/dog_service.dart';
-import 'package:intro_to_flutter/ui/block/dog_block.dart';
+import 'package:intro_to_flutter/ui/block/dog_bloc.dart';
 import 'package:intro_to_flutter/ui/block/dog_event.dart';
 import 'package:intro_to_flutter/ui/dog_list.dart';
 
@@ -30,7 +29,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final _bloc = DogBloc();
 
-
   @override
   void initState() {
     super.initState();
@@ -49,11 +47,11 @@ class _MyHomePageState extends State<MyHomePage> {
             stream: _bloc.stateStream,
             initialData: List<Dog>(),
             builder: (
-          BuildContext context,
-          AsyncSnapshot<List<Dog>> snapshot,
-        ) {
-          return DogList(snapshot.data);
-        }),
+              BuildContext context,
+              AsyncSnapshot<List<Dog>> snapshot,
+            ) {
+              return DogList(snapshot.data);
+            }),
       ),
     );
   }

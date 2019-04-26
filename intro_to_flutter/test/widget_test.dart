@@ -12,7 +12,6 @@ void main() {
   test("ensure image is returned", () async {
     getRandomImage().listen((String url){
       assert(url.isNotEmpty);
-      print(url);
     });
   });
 
